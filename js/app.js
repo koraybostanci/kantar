@@ -708,7 +708,7 @@ async function deliverFile(name, content, type) {
 
 async function exportBackup(withPhotos) {
   const { apiKey, oaKey, ...settingsNoKeys } = S.settings;
-  const data = { app: 'kantar', v: SCHEMA_VERSION, at: new Date().toISOString(), settings: settingsNoKeys, entries: S.entries, days: Object.values(S.days), checks: S.checks };
+  const data = { app: 'denge', v: SCHEMA_VERSION, at: new Date().toISOString(), settings: settingsNoKeys, entries: S.entries, days: Object.values(S.days), checks: S.checks };
   // The plan's pictures always travel with the backup; photos of logged meals only when asked for.
   // They are read one at a time, so the photos that are left out are never loaded.
   const planIds = new Set(Object.values(S.settings.planPhotos || {}));
@@ -718,7 +718,7 @@ async function exportBackup(withPhotos) {
     if (p) content.push((content.length > 1 ? ',' : '') + JSON.stringify({ id: p.id, type: p.type, w: p.w, h: p.h, plan: p.plan, b64: b64FromBuf(p.buf) }));
   }
   content.push(']}');
-  const done = await deliverFile(`kantar-backup-${today()}.json`, content, 'application/json');
+  const done = await deliverFile(`denge-backup-${today()}.json`, content, 'application/json');
   if (!done) return;
   S.settings.lastBackup = Date.now();
   await saveSettings();
@@ -870,7 +870,7 @@ async function checkWins() {
   let msg = '';
   if (w) {
     if (kilos > (w.kilos || 0)) { msg = kilos === 1 ? 'First kilo down' : `${kilos} kilos down`; next.kilos = kilos; }
-    if (perfect && w.perfect !== t) { msg = msg || 'Perfect day: all five goals done'; next.perfect = t; }
+    if (perfect && w.perfect !== t) { msg = msg || 'All five goals done today'; next.perfect = t; }
     if (!msg) return;
   }
   winsBusy = true;
@@ -1072,6 +1072,7 @@ const ACT = {
     render();
     toast('Entry updated');
   },
+  'chart-range': (el) => { S.chartRange = el.dataset.v === 'whole' ? 'whole' : 'weeks'; render(); },
   'cal': (el) => { S.calPick = S.calPick === el.dataset.day ? null : el.dataset.day; render(); },
   'goto-day': (el) => { if (el.dataset.day <= today()) { S.viewDay = el.dataset.day; go('today'); } },
   // Settings
@@ -1232,7 +1233,7 @@ const ACT = {
     try {
       // Only this app's own cache and worker: other apps on the same host share the origin
       const keys = await caches.keys();
-      await Promise.all(keys.filter((k) => k.startsWith('kantar-')).map((k) => caches.delete(k)));
+      await Promise.all(keys.filter((k) => k.startsWith('denge-') || k.startsWith('kantar-')).map((k) => caches.delete(k)));
       const here = new URL('./', location.href).href;
       const regs = await navigator.serviceWorker.getRegistrations();
       await Promise.all(regs.filter((r) => r.scope === here).map((r) => r.unregister()));
@@ -1454,7 +1455,7 @@ window.addEventListener('online', resumePending);
 })();
 
 // For tests and debugging
-if (location.hostname === 'localhost') window.__kantar = { S, parseLocal, render, submitPhotos, dayVerdict, verdictText, reviewBrief, autoReview, checkBrief };
+if (location.hostname === 'localhost') window.__denge = { S, parseLocal, render, submitPhotos, dayVerdict, verdictText, reviewBrief, autoReview, checkBrief };
 
 // Keep the composer above the on-screen keyboard
 if (window.visualViewport) {

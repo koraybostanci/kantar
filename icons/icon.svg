@@ -1,1 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img"><title>Kantar</title><rect width="512" height="512" rx="114" fill="#1B2317"/><g transform="translate(2 -10)"><circle cx="204" cy="130" r="24" fill="none" stroke="#F3F5F0" stroke-width="16"/><path d="M204 154v30" stroke="#F3F5F0" stroke-width="16" stroke-linecap="round"/><rect x="72" y="180" width="396" height="46" rx="23" fill="#F2B01E"/><path d="M262 206v20M296 206v20M330 206v20M400 206v20M434 206v20" stroke="#1B2317" stroke-width="10" stroke-linecap="round"/><circle cx="108" cy="320" r="28" fill="#D2452E"/><circle cx="152" cy="326" r="22" fill="#3C8A55"/><path d="M128 216 60 344M128 216l68 128" stroke="#F3F5F0" stroke-width="13" stroke-linecap="round" fill="none"/><path d="M36 342h184a92 60 0 0 1-184 0z" fill="#F3F5F0"/><rect x="345" y="168" width="40" height="70" rx="13" fill="#F3F5F0"/><path d="M365 236v36" stroke="#F3F5F0" stroke-width="13"/><path d="M365 262c-28 22-47 46-47 72a47 47 0 0 0 94 0c0-26-19-50-47-72z" fill="#F3F5F0"/></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <title>Denge: a level beam in balance, a plate of greens on one side and a brass weight on the other</title>
+  <rect width="512" height="512" rx="112" fill="#15201B"/>
+  <g id="art" transform="translate(0 -26)">
+    <!-- The plate, with food in it -->
+    <path d="M84 226h144a72 50 0 0 1-144 0z" fill="#ECEFE8"/>
+    <circle cx="124" cy="212" r="26" fill="#2BB596"/>
+    <circle cx="166" cy="204" r="30" fill="#D9A23A"/>
+    <circle cx="200" cy="218" r="20" fill="#2BB596"/>
+    <!-- The brass weight -->
+    <rect x="320" y="196" width="100" height="94" rx="14" fill="#D9A23A"/>
+    <!-- The beam, level, with its graduations -->
+    <rect x="62" y="290" width="388" height="28" rx="6" fill="#ECEFE8"/>
+    <path d="M318 330v18M360 330v18M402 330v18" stroke="#9BA39C" stroke-width="10"/>
+    <!-- The point it balances on -->
+    <path d="M256 318 206 418h100z" fill="#ECEFE8"/>
+  </g>
+</svg>
